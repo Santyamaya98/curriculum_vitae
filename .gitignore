@@ -1,0 +1,31 @@
+# Ignore the virtual environment directory
+env/
+
+# Ignore Python bytecode files
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore Django migrations
+*/migrations/*
+*.sqlite3
+
+# Ignore local settings
+*.local.py
+
+# Ignore log files
+*.log
+
+# Ignore media files
+media/
+
+# Ignore environment variables file
+.env
+
+# Ignore IDE configuration files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Ignore any other files or directories you don't want to track

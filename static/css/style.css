@@ -1,0 +1,68 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #f0f4f8; /* Fondo suave */
+}
+
+/* Estilo para el encabezado */
+header {
+    background-color: #003366; /* Azul oscuro */
+    color: #ffffff; /* Texto blanco */
+    padding: 15px 0;
+}
+
+header a {
+    color: #ffffff; /* Enlaces blancos */
+    text-decoration: none; /* Sin subrayado */
+}
+
+/* Estilo del contenedor principal */
+.container {
+    max-width: 800px;
+    margin: 20px auto; /* Centra el contenedor */
+    padding: 20px;
+    background-color: #ffffff; /* Fondo blanco para el contenido */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Estilo de los títulos */
+h1, h2 {
+    color: #003366; /* Azul oscuro para los títulos */
+}
+
+h1 {
+    border-bottom: 2px solid #003366; /* Línea debajo del título principal */
+    padding-bottom: 10px; /* Espacio debajo del título */
+}
+
+h2 {
+    margin-top: 20px; /* Espacio superior para los subtítulos */
+}
+
+/* Listas */
+ul {
+    list-style-type: none; /* Sin viñetas */
+    padding: 0;
+}
+
+li {
+    background: #cce5ff; /* Azul claro */
+    margin: 5px 0; /* Espacio entre los elementos */
+    padding: 10px; /* Espacio interior */
+    border-radius: 4px; /* Bordes redondeados */
+}
+
+/* Estilo del pie de página */
+footer {
+    background-color: #003366; /* Azul oscuro */
+    color: #ffffff; /* Texto blanco */
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}

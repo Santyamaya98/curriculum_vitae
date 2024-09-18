@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Mi CV{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>{{ cv.first_name }} {{ cv.last_name }}</h1>
+    <p>Email: {{ cv.email }}</p>
+    <p>Teléfono: {{ cv.phone_number }}</p>
+    <p>LinkedIn: <a href="{{ cv.linkedin_profile }}">{{ cv.linkedin_profile }}</a></p>
+    <p>GitHub: <a href="{{ cv.github_profile }}">{{ cv.github_profile }}</a></p>
+
+    <p>Resumen: {{ cv.summary }}</p>
+
+    <h2>Certificaciones</h2>
+    <ul>
+        {% for certification in certifications %}
+        <li>{{ certification.certificate_name }} - {{ certification.institution_name }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Habilidades</h2>
+    <p><strong>Habilidades blandas:</strong> {{ skills.soft_skills }}</p>
+    <p><strong>Habilidades técnicas:</strong> {{ skills.technical_skills }}</p>
+
+    <h2>Educación</h2>
+    <ul>
+        {% for edu in education %}
+        <li>{{ edu.degree }} en {{ edu.institution }} ({{ edu.start_date }} - {{ edu.end_date }})</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Experiencia Laboral</h2>
+    <ul>
+        {% for work in work_experience %}
+        <li>{{ work.job_title }} en {{ work.company }} ({{ work.start_date }} - {{ work.end_date }})</li>
+        {% endfor %}
+    </ul>
+
+    <h2>Proyectos</h2>
+    <ul>
+        {% for project in projects %}
+        <li>{{ project.name }}: {{ project.description }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

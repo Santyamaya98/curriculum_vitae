@@ -17,6 +17,7 @@ class CV(models.Model):
 
 class Certifications(models.Model):
     # Origin of certificate
+    cv = models.ForeignKey(CV, related_name='languages', on_delete=models.CASCADE, null=True)
     certificate_name = models.CharField(max_length=100)
     certificate_image = models.ImageField(upload_to='certificates/', blank=True, null=True)
     institution_name = models.CharField(max_length=100)

@@ -625,16 +625,16 @@ body {
   margin: 0;
   padding: 0;
   color: #333;
-  background-color: #f0f4f8;
+  background-color: #7795b3;
   /* Fondo suave */
 }
 
 /* Estilo para el encabezado */
 
 header {
-  background-color: #003366;
+  background-color: #4f88dd;
   /* Azul oscuro */
-  color: #ffffff;
+  color: #1d91c7;
   /* Texto blanco */
   padding: 15px 0;
 }

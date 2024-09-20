@@ -17,7 +17,7 @@ class CV(models.Model):
 
 class Certifications(models.Model):
     # Origin of certificate
-    cv = models.ForeignKey(CV, related_name='languages', on_delete=models.CASCADE, null=True)
+    cv = models.ForeignKey(CV, on_delete=models.CASCADE, null=True)
     certificate_name = models.CharField(max_length=100)
     certificate_image = models.ImageField(upload_to='certificates/', blank=True, null=True)
     institution_name = models.CharField(max_length=100)
@@ -26,25 +26,11 @@ class Certifications(models.Model):
     def __str__(self):
         return self.certificate_name
 
-class Language(models.Model):
-    name = models.CharField(max_length=100)
-    proficiency = models.CharField(
-        max_length=50,
-        choices=[
-            ('Beginner', 'Beginner'),
-            ('Intermediate', 'Intermediate'),
-            ('Advanced', 'Advanced'),
-            ('Fluent', 'Fluent'),
-        ]
-    )
-
-    def __str__(self):
-        return f'{self.name} ({self.proficiency})'
 
 class Skills(models.Model):
     # Many-to-many relationship with Language
-    languages = models.ManyToManyField(Language, blank=True)
 
+    cv = models.ForeignKey(CV, on_delete=models.CASCADE, null=True)
     # Other skill categories
     soft_skills = models.CharField(max_length=200)
     technical_skills = models.TextField()
@@ -52,14 +38,10 @@ class Skills(models.Model):
     def __str__(self):
         return f'Skills: {self.soft_skills}'
 
-class Formation(models.Model):  # Definido el modelo Formation
-    name = models.CharField(max_length=100)  # Puede ser el nombre de la persona o algún identificador
-
-    def __str__(self):
-        return self.name
 
 class Education(models.Model):
-    formation = models.ForeignKey(Formation, related_name='education', on_delete=models.CASCADE)
+
+    cv = models.ForeignKey(CV, on_delete=models.CASCADE, null=True)
     degree = models.CharField(max_length=100)
     institution = models.CharField(max_length=100)
     start_date = models.DateField()
@@ -70,7 +52,8 @@ class Education(models.Model):
         return f'{self.degree} from {self.institution}'
 
 class WorkExperience(models.Model):
-    formation = models.ForeignKey(Formation, related_name='work_experience', on_delete=models.CASCADE)
+
+    cv = models.ForeignKey(CV,  on_delete=models.CASCADE, null=True)
     job_title = models.CharField(max_length=100)
     company = models.CharField(max_length=100)
     start_date = models.DateField()
@@ -81,9 +64,12 @@ class WorkExperience(models.Model):
         return f'{self.job_title} at {self.company}'
 
 class Project(models.Model):
-    formation = models.ForeignKey(Formation, related_name='projects', on_delete=models.CASCADE)
+
+    cv = models.ForeignKey(CV, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=100)
     description = models.TextField()
 
     def __str__(self):
         return self.name
+    
+

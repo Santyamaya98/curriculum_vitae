@@ -6,28 +6,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href= "{% static 'css/style.css' %}" rel="stylesheet">
-    <link href="{% static 'css/output.css' %}" rel="stylesheet">
-    <title>{% block title %}Mi CV{% endblock %}</title>
+    <link href= "{% static 'css/output.css' %}" rel="stylesheet">
+    <title>{% block title %}Santiago Amaya C.{% endblock %}</title>
 </head>
 <body class="bg-gray-100">
-    <header class="bg-blue-500 p-4 text-white">
-        <nav class="container mx-auto">
-            <h1 class="text-lg font-bold">Mi CV</h1>
-            <ul class="flex space-x-4">
-                <li><a href="{% url 'home' %}" class="hover:underline">Inicio</a></li>
-                <li><a href="{% url 'add' %}" class="hover:underline">Formulario CV</a></li>
-                <li><a href="#" class="hover:underline">Contacto</a></li>
-            </ul>
-        </nav>
+    <header class="header">
+        <div class="header-content">
+            <h1 class="name-box">Santiago Amaya Cetina</h1>
+            <div class="social-buttons">
+                <a href="https://www.linkedin.com" target="_blank" class="social-button">LinkedIn</a>
+                <a href="https://github.com" target="_blank" class="social-button">GitHub</a>
+            </div>
+            <div class="hamburger-menu" onclick="toggleMenu()">
+                &#9776; <!-- Hamburger icon -->
+                <div id="menu" class="hidden">
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#contact">Contact Information for Interview</a></li>
+                    </ul>
+            </div>
+        </div>
+ 
+        </div>
     </header>
-
+    
     <main class="container mx-auto p-6">
         {% block content %}
         {% endblock %}
     </main>
 
     <footer class="bg-blue-500 text-white text-center py-4">
-        <p>&copy; 2024 Mi CV. Todos los derechos reservados.</p>
+        <p>&copy; Santiago Amaya all rights reserved .</p>
     </footer>
 </body>
+<script> 
+    
+function toggleMenu() {
+    const menu = document.getElementById('menu');
+    menu.classList.toggle('hidden'); // Toggle visibility
+    }
+</script>
 </html>

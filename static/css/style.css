@@ -1,125 +1,146 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Estilos generales */
-body {
-    font-family: 'Arial', sans-serif; /* Fuente moderna */
+.body {
+    background: linear-gradient(to bottom, #000c41, #06558a); /* Smooth gradient */
     margin: 0;
-    padding: 0;
-    color: #333; /* Color de texto estándar */
-    background-color: #3d88f8; /* Azul claro como fondo */
-}
-
-/* Estilo para el encabezado */
-header {
-    background-color: rgba(20, 164, 248, 0.8); /* Azul oscuro con un poco de transparencia */
-    color: #ffffff; /* Texto blanco */
-    padding: 20px 0; /* Mayor padding para mejor apariencia */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil */
-}
-
-/* Estilo para enlaces en el encabezado */
-header a {
-    color: #ff0909; /* Enlaces blancos */
-    text-decoration: none; /* Sin subrayado */
-    transition: color 0.1s; /* Transición suave al pasar el ratón */
-}
-
-header a:hover {
-    color: #000000; /* Color más claro al pasar el ratón */
+    font-family: Arial, sans-serif;
 }
 
 
-/* Estilo del contenedor principal */
-.container {
-    max-width: 800px;
-    margin: 40px auto; /* Espacio más grande arriba y abajo */
-    padding: 20px;
-    background-color: #ffffff; /* Fondo blanco para el contenido */
-    border-radius: 12px; /* Bordes más redondeados */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra más suave */
+.header {
+    background: linear-gradient(to right, #090274, #15a6e9); /* Silver and gold */
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-/* Estilo de los títulos */
-h1, h2 {
-    color: #003366; /* Azul oscuro para los títulos */
-    margin-bottom: 15px; /* Espacio debajo de los títulos */
+.header-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
 }
 
 h1 {
-    border-bottom: 3px solid #003366; /* Línea más gruesa debajo del título principal */
-    padding-bottom: 10px; /* Espacio debajo del título */
+    margin: 0;
+    color: #000; /* Text color for your name */
 }
 
-h2 {
-    margin-top: 20px; /* Espacio superior para los subtítulos */
-    font-size: 1.5rem; /* Tamaño de fuente más grande */
+.social-buttons {
+    margin: 0 20px;
 }
 
-/* Listas */
-ul {
-    list-style-type: none; /* Sin viñetas */
-    padding: 0;
+.social-button {
+    margin-right: 10px;
+    text-decoration: none;
+    color: #fff; /* Button text color */
+    background-color: #147cb8; /* Dark background for buttons */
+    padding: 5px 10px;
+    border-radius: 5px;
 }
 
-li {
-    background: #cce5ff; /* Azul claro */
-    margin: 10px 0; /* Espacio entre los elementos */
-    padding: 15px; /* Espacio interior */
-    border-radius: 8px; /* Bordes más redondeados */
-    transition: background 0.3s; /* Transición suave */
+.hamburger-menu {
+    cursor: pointer;
+    font-size: 24px; /* Adjust size as needed */
 }
 
-li:hover {
-    background: #99ccff; /* Cambio de color al pasar el ratón */
-}
-
-/* Estilo del pie de página */
-footer {
-    background-color: #003366; /* Azul oscuro */
-    color: #ffffff; /* Texto blanco */
+.footer {
+    background-color: #003366; /* Dark blue */
+    color: #ffffff; /* White text */
     text-align: center;
-    padding: 15px; /* Mayor padding */
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    margin-top: 40px; /* Espacio superior para separación del contenido */
+    padding: 15px;
+    font-size: 16px; /* Slightly larger text */
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); /* Shadow on top */
 }
 
-/* Estilo del formulario */
-form {
-    background-color: #f9f9f9; /* Fondo gris suave para el formulario */
-    padding: 20px; /* Espacio interior */
-    border-radius: 8px; /* Bordes redondeados */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+
+/* Styles for the certification carousel */
+.certification-carousel {
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap; /* Prevents wrapping */
 }
 
-input, textarea, select {
-    width: 100%; /* Ocupa todo el ancho */
-    padding: 10px; /* Espacio interior */
-    border: 1px solid #ddd; /* Borde ligero */
-    border-radius: 4px; /* Bordes redondeados */
-    margin-bottom: 15px; /* Espacio entre los campos */
-    transition: border-color 0.3s; /* Transición suave */
+.certification-carousel img {
+    width: 200px; /* Adjust as needed */
+    height: auto;
+    margin-right: 10px; /* Space between images */
 }
 
-input:focus, textarea:focus, select:focus {
-    border-color: #003366; /* Color de borde al enfocar */
-    outline: none; /* Sin contorno por defecto */
+.certification-carousel img {
+    transition: transform 0.2s ease; /* Smooth scaling */
 }
 
-/* Botón de envío */
-button {
-    background-color: #003366; /* Azul oscuro */
-    color: #ffffff; /* Texto blanco */
-    padding: 12px 20px; /* Espacio interior */
-    border: none; /* Sin borde */
-    border-radius: 5px; /* Bordes redondeados */
-    cursor: pointer; /* Cambia el cursor al pasar el ratón */
-    transition: background 0.3s; /* Transición suave */
+.certification-carousel img:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
 }
 
-button:hover {
-    background-color: #00509e; /* Color más claro al pasar el ratón */
+
+.hidden {
+    display: none;
 }
+
+.header {
+    background-color: silver; /* Silver background for the header */
+    color: gold; /* Gold text */
+    padding: 10px;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.social-button {
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.social-button:hover {
+    background-color: #ffcc00; /* Brighter on hover */
+}
+
+
+.hamburger-menu {
+    cursor: pointer; /* Pointer cursor for the hamburger icon */
+}
+
+/* Menu styles */
+#menu {
+    background-color: white; /* Background for dropdown menu */
+    position: absolute; /* Positioning */
+    right: 10px; /* Align to the right */
+    top: 50px; /* Adjust based on header height */
+    border: 1px solid #ccc; /* Border */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow */
+}
+
+#menu ul {
+    list-style-type: none; /* No bullet points */
+    padding: 10px; /* Padding inside the menu */
+    margin: 0; /* Remove default margin */
+}
+
+#menu li {
+    margin: 5px 0; /* Space between items */
+}
+
+#menu a {
+    text-decoration: none; /* No underline */
+    color: black; /* Text color */
+    display: block; /* Block elements */
+    padding: 5px; /* Padding */
+}
+
+.name-box {
+    background-color: #003366; /* Gold */
+    color: #d7f1d2; /* Black text */
+    padding: 20px; /* Space inside */
+    border: 3px solid #003366; /* Darker gold */
+    border-radius: 10px; /* Rounded corners */
+    text-align: center; /* Center the text */
+    font-size: 32px; /* Larger font size */
+    font-weight: bold; /* Bold text */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+    margin: 20px 0; /* Space above and below */
+}
+

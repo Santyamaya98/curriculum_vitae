@@ -1,4 +1,3 @@
-
 {% extends 'base.html' %}
 
 {% block title %}Mi CV{% endblock %}
@@ -7,12 +6,19 @@
 
 <div class="container">
     <h1>{{ cv.first_name }} {{ cv.last_name }}</h1>
-    <p>Email: {{ cv.email }}</p>
-    <p>cell phone: {{ cv.phone_number }}</p>
-    <p>LinkedIn: <a href="{{ cv.linkedin_profile }}">{{ cv.linkedin_profile }}</a></p>
-    <p>GitHub: <a href="{{ cv.github_profile }}">{{ cv.github_profile }}</a></p>
+    
+    <div class="info-section">
+        <p class="info-item"><strong>Email:</strong> <a href="mailto:{{ cv.email }}">{{ cv.email }}</a></p>
+        <p class="info-item"><strong>Celular:</strong> {{ cv.phone_number }}</p>
+        <p class="info-item"><strong>LinkedIn:</strong> <a href="{{ cv.linkedin_profile }}">{{ cv.linkedin_profile }}</a></p>
+        <p class="info-item"><strong>GitHub:</strong> <a href="{{ cv.github_profile }}">{{ cv.github_profile }}</a></p>
+    </div>
 
-    <p>Resumen: {{ cv.summary }}</p>
+    <div class="summary">
+        <h2>Resumen</h2>
+        <p>{{ cv.summary }}</p>
+    </div>
+    
     <h2>Certificates</h2>
     <div class="certification-carousel" id="carousel">
         {% for certification in certifications %}
@@ -33,34 +39,33 @@
     <script>
         const carousel = document.getElementById('carousel');
         let index = 0;
-    
-        // Set the width of the carousel images dynamically
+
         const images = carousel.getElementsByTagName('img');
-        const imageWidth = images[0]?.clientWidth || 200; // Default width if no images
-    
+        const imageWidth = images[0]?.clientWidth || 200;
+
         setInterval(() => {
-            index = (index + 1) % images.length; // Loop through images
-            carousel.scrollLeft = index * (imageWidth + 10); // Adjust for margin
-        }, 3000); // Change images every 3 seconds
+            index = (index + 1) % images.length;
+            carousel.scrollLeft = index * (imageWidth + 10);
+        }, 3000);
     </script>
-    
 
-
-    <h2>skills</h2>
-    <p><strong>soft_skills:</strong> {{ skills.soft_skills }}</p>
-    <p><strong>technical skills:</strong> {{ skills.technical_skills }}</p>
+    <h2>Skills</h2>
+    <p class = "p1"> <strong>Soft Skills:</strong> {{ skills.soft_skills }}</p>
+    <p class = "p1"> <strong>Technical skills:</strong> {{ skills.technical_skills }}</p>
 
     <h2>Education</h2>
     <ul>
         {% for edu in education %}
         <li>{{ edu.degree }} in {{ edu.institution }} ({{ edu.start_date }} - {{ edu.end_date }})</li>
+        <li> {{edu.description}} <li>
         {% endfor %}
     </ul>
 
-    <h2>Job Experience</h2>
+    <h2>Work Experience</h2>
     <ul>
         {% for work in work_experience %}
-        <li>{{ work.job_title }} in {{ work.company }} ({{ work.start_date }} - {{ work.end_date }})</li>
+        <li> {{ work.job_title }} en {{ work.company }} ({{ work.start_date }} - {{ work.end_date }})</li>
+        <li> {{work.responsibilities}} <li>
         {% endfor %}
     </ul>
 
@@ -68,7 +73,9 @@
     <ul>
         {% for project in projects %}
         <li>{{ project.name }}: {{ project.description }}</li>
+        <li> {{ project.description}} </li>
         {% endfor %}
     </ul>
 </div>
+
 {% endblock %}

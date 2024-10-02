@@ -1,29 +1,96 @@
 
+import time 
+import requests
 from django.views import View
 from django.views.generic import TemplateView
 from django.shortcuts import render, redirect
-from django.forms import modelformset_factory
+from django.http import JsonResponse
+from dotenv import load_dotenv
+from django.shortcuts import redirect, render
+
+
 
 from .models import CV, Certifications, Skills, Education, WorkExperience, Project
-from .forms import CVForm, CertificationsForm, SkillsForm, EducationForm, WorkExperienceForm, ProjectForm
+from .forms import CVForm, SkillsForm, EducationForm, WorkExperienceForm, ProjectForm
+from .spotify_utils import SpotifyAuth
+
+# Vistas de Django
+load_dotenv()
+
+def login(request):
+    spotify_auth = SpotifyAuth()
+    return redirect(spotify_auth.get_auth_url())
 
 
+def callback(request):
+    code = request.GET.get('code')
+    if code:
+        spotify_auth = SpotifyAuth()
+        token_info = spotify_auth.exchange_token(code)
 
-CertificationsFormSet = modelformset_factory(Certifications, form=CertificationsForm, extra=1)
+        # Store tokens in session
+        request.session['access_token'] = token_info['access_token']
+        request.session['refresh_token'] = token_info.get('refresh_token')
+        request.session['expires_at'] = time.time() + token_info['expires_in']
 
+        # Validate access token by checking playback state
+        access_token = request.session['access_token']
+        playback_state = check_playback_state(access_token)
 
+        return JsonResponse(playback_state)
+
+    return JsonResponse({'error': 'No code provided'}, status=400)
+
+def check_scope(access_token):
+    url = "https://api.spotify.com/v1/me/permission/check_scope?scope=web-playback"
+    headers = {
+        "Authorization": f"Bearer {access_token}"
+    }
+    response = requests.get(url, headers=headers)
+
+    if response.status_code == 200:
+        return response.json()  # Successful scope check
+    elif response.status_code == 401:
+        return {'error': 'Unauthorized: Invalid access token'}
+    else:
+        return {'error': f'Error {response.status_code}: {response.text}'}
     
+
+
+def check_playback_state(access_token):
+    url = "https://api.spotify.com/v1/me/player"
+    headers = {
+        "Authorization": f"Bearer {access_token}"
+    }
+    
+    response = requests.get(url, headers=headers)
+    
+    if response.status_code == 200:
+        return response.json()  # Successfully retrieved playback state
+    elif response.status_code == 401:
+        return {'error': 'Unauthorized: Invalid access token'}
+    else:
+        return {'error': f'Error {response.status_code}: {response.text}'}
+
+
+
+
+
 class CVPageView(TemplateView):
     template_name = 'resume/cv_page.html'  # Asegúrate de que la ruta sea correcta
 
     def get_context_data(self, **kwargs):
+
+        
         context = super().get_context_data(**kwargs)
+        context['access_token'] = self.request.session.get('access_token')  # Obtén el token de la sesión
         context['cv'] = CV.objects.first()  # Suponiendo que solo hay un CV
         context['certifications'] = Certifications.objects.all()
         context['skills'] = Skills.objects.first()  # Solo uno, o ajusta si tienes varios
         context['education'] = Education.objects.all()
         context['work_experience'] = WorkExperience.objects.all()
         context['projects'] = Project.objects.all()
+
         return context
 
 class CVCreateView(View):
@@ -87,3 +154,6 @@ class CVCreateView(View):
             'project_form': project_form,
         }
         return render(request, 'resume/cv_form.html', context)
+
+    
+

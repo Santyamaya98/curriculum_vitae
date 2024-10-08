@@ -1,86 +1,38 @@
 import os
-import requests
+import random
+import string
+from django.shortcuts import redirect
+from django.http import JsonResponse
+from spotipy import Spotify
+from spotipy.oauth2 import SpotifyOAuth
 from dotenv import load_dotenv
-import time
 
+# Cargar variables de entorno
 load_dotenv()
 
-class SpotifyAuth:
-    def __init__(self):
-        load_dotenv()
-        self.client_id = os.getenv('CLIENT_ID')
-        self.client_secret = os.getenv('CLIENT_SECRET')
-        self.redirect_uri = 'http://localhost:8000/home/callback/'
+client_id = os.getenv('CLIENT_ID')
+client_secret = os.getenv('CLIENT_SECRET')
+redirect_uri = os.getenv('REDIRECT_URI')
 
-    def get_auth_url(self):
-        scope = "streaming user-modify-playback-state user-read-playback-state"
-        state = self.generate_random_string(16)
-        auth_query_parameters = {
-            'response_type': 'code',
-            'client_id': self.client_id,
-            'scope': scope,
-            'redirect_uri': self.redirect_uri,
-            'state': state
-        }
-        return f"https://accounts.spotify.com/authorize/?{requests.compat.urlencode(auth_query_parameters)}"
+# Configurar el alcance
+scope = "streaming user-read-email user-read-private"
 
-    def exchange_token(self, code):
-        response = requests.post('https://accounts.spotify.com/api/token', {
-            'grant_type': 'authorization_code',
-            'code': code,
-            'redirect_uri': self.redirect_uri,
-            'client_id': self.client_id,
-            'client_secret': self.client_secret,
-        })
-        if response.status_code != 200:
-            raise Exception(f"Error exchanging token: {response.text}")
-        return response.json()
+def generate_random_string(length):
+    possible = string.ascii_letters + string.digits  # A-Z, a-z, 0-9
+    return ''.join(random.choice(possible) for _ in range(length))
 
-    @staticmethod
-    def generate_random_string(length):
-        import random
-        import string
-        return ''.join(random.choices(string.ascii_letters + string.digits, k=length))
+def login(request):
+    sp_oauth = SpotifyOAuth(client_id, client_secret, redirect_uri, scope=scope)
+    return redirect(sp_oauth.get_authorize_url())
 
-    def get_token(self, reuests):
-        access_token = request.session.get('access_token')
-        refresh_token = request.session.get('refresh_token')
-        expires_at = request.session.get('expires_at', 3600)
-
-        if time.time() > expires_at:
-            token_info = self.refresh_access_token(refresh_token)
-            access_token = token_info['access_token']
-            request.session['access_token'] = access_token
-            request.session['expires_at'] = time.time() + token_info['expires_in']
-
-        return access_token
-
-    def refresh_access_token(self, refresh_token):
-        response = requests.post('https://accounts.spotify.com/api/token', {
-            'grant_type': 'refresh_token',
-            'refresh_token': refresh_token,
-            'client_id': self.client_id,
-            'client_secret': self.client_secret,
-        })
-        if response.status_code != 200:
-            raise Exception(f"Error refreshing token: {response.text}")
-        return response.json()
-
-
-class MockRequest:
-    def __init__(self):
-        self.session = {
-            'access_token': f'{os.getenv('CLIENT_ID')}',  # Replace with a valid token for testing
-            'refresh_token': f'{os.getenv('CLIENT_SECRET')}',  # Replace with a valid refresh token
-            'expires_at': time.time() + 3600  # Assume not expired
-        }
-'''
-# Create an instance of SpotifyAuth
-autho = SpotifyAuth()
-
-# Create a mock request
-mock_request = MockRequest()
-
-# Call the get_token method with the mock request
-print(autho.get_token(mock_request))
-'''
+def callback(request):
+    sp_oauth = SpotifyOAuth(client_id, client_secret, redirect_uri, scope=scope)
+    token_info = sp_oauth.get_access_token(request.GET.get('code'))
+    
+    if token_info:
+        access_token = token_info['access_token']
+        print('Este es el access token:', access_token)
+        # Aquí puedes guardar el token o usarlo según sea necesario
+        return redirect('http://127.0.0.1:8000/home/')  # Redirige a la página deseada
+    else:
+        return JsonResponse({'error': 'Failed to obtain access token'}, status=400)

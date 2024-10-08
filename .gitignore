@@ -29,3 +29,4 @@ media/
 *.sublime-workspace
 
 # Ignore any other files or directories you don't want to track
+.cache

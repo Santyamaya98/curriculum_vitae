@@ -4,43 +4,14 @@ import requests
 from django.views import View
 from django.views.generic import TemplateView
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
-from dotenv import load_dotenv
 from django.shortcuts import redirect, render
 
 
 
 from .models import CV, Certifications, Skills, Education, WorkExperience, Project
 from .forms import CVForm, SkillsForm, EducationForm, WorkExperienceForm, ProjectForm
-from .spotify_utils import SpotifyAuth
 
 # Vistas de Django
-load_dotenv()
-
-def login(request):
-    spotify_auth = SpotifyAuth()
-    return redirect(spotify_auth.get_auth_url())
-
-
-def callback(request):
-    code = request.GET.get('code')
-    if code:
-        spotify_auth = SpotifyAuth()
-        token_info = spotify_auth.exchange_token(code)
-
-        # Store tokens in session
-        request.session['access_token'] = token_info['access_token']
-        request.session['refresh_token'] = token_info.get('refresh_token')
-        request.session['expires_at'] = time.time() + token_info['expires_in']
-
-        # Validate access token by checking playback state
-        access_token = request.session['access_token']
-        playback_state = check_playback_state(access_token)
-
-        return JsonResponse(playback_state)
-
-    return JsonResponse({'error': 'No code provided'}, status=400)
-
 def check_scope(access_token):
     url = "https://api.spotify.com/v1/me/permission/check_scope?scope=web-playback"
     headers = {

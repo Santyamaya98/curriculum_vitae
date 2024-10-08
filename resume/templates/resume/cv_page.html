@@ -1,11 +1,28 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}Mi CV{% endblock %}
 
 {% block content %}
 
 <div class="container">
     <h1>{{ cv.first_name }} {{ cv.last_name }}</h1>
+
+    <div id="spotify-player">
+        <h1>Spotify Player</h1>
+        <div class="player-controls">
+            <button id="prevTrack">Previous</button>
+            <button id="togglePlay">Play/Pause</button>
+            <button id="nextTrack">Next</button>
+        </div>
+        <div id="currentTrack">
+            <h2>Now Playing: <span id="trackName">N/A</span></h2>
+        </div>
+    </div>
+
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>
+    <script src="{% static 'js/spoti_js.js' %}"></script>
+   
+    </div>
     
     <div class="info-section">
         <p class="info-item"><strong>Email:</strong> <a href="mailto:{{ cv.email }}">{{ cv.email }}</a></p>
@@ -81,100 +98,4 @@
         <li> {{ project.description}} </li>
         {% endfor %}
     </ul>
-           
-</div>
-<div id="spotify-player">
-    <h1>Spotify Player</h1>
-    <div class="player-controls">
-        <button id="prevTrack">Previous</button>
-        <button id="togglePlay">Play/Pause</button>
-        <button id="nextTrack">Next</button>
-    </div>
-    <div id="currentTrack">
-        <h2>Now Playing: <span id="trackName">N/A</span></h2>
-    </div>
-    
-    <script src="https://sdk.scdn.co/spotify-player.js"></script>
-    <script>
-        window.onSpotifyWebPlaybackSDKReady = () => {
-            const token = "BQC0E5exV5dG2Tl3zUfCiq4QV_k4Rwi3mSDUuMGvAlrw6y8R-8CjbPxMbXYUSPmXbj9VAv7QYJzgX2TXIqKj4eNcSdsNdP6z0esiDGXGTF-kxJ8aFGJmuyx-eue2rKcq3EnapfwxcOzKLZ25FRBxRft2AHL5zTv8Lpx56u0Bc8WqHAjnCLwt9aUHwFmiOWULomiHrI9JGbJRho8DLgL2YyV6aSxrUHDRKo5IA8G9";  // Dynamic token
-            console.log("Access Token:", token);
-
-            const player = new Spotify.Player({
-                name: 'Web Playback SDK Quick Start Player',
-                getOAuthToken: cb => { 
-                    cb(token); 
-                    console.log("OAuth token provided:", token); 
-                },
-                volume: 0.5
-            });
-
-            player.addListener('ready', ({ device_id }) => {
-                console.log('Ready with Device ID:', device_id);
-            });
-
-            player.addListener('not_ready', ({ device_id }) => {
-                console.log('Device ID has gone offline:', device_id);
-            });
-
-            player.addListener('initialization_error', ({ message }) => {
-                console.error('Initialization Error:', message);
-            });
-
-            player.addListener('authentication_error', ({ message }) => {
-                console.error('Authentication Error:', message);
-            });
-
-            player.addListener('account_error', ({ message }) => {
-                console.error('Account Error:', message);
-            });
-
-            player.addListener('player_state_changed', state => {
-                console.log('Player State Changed:', state);
-                document.getElementById('trackName').innerText = state.track_window.current_track.name;
-            });
-
-            document.getElementById('togglePlay').onclick = function() {
-                console.log("Toggle Play / Pause button clicked");
-                player.togglePlay().then(() => {
-                    console.log("Toggle Play successful");
-                }).catch(error => {
-                    console.error('Play Error:', error);
-                });
-            };
-
-            document.getElementById('nextTrack').onclick = function() {
-                console.log("Next Track button clicked");
-                player.nextTrack().then(() => {
-                    console.log("Skipped to next track");
-                }).catch(error => {
-                    console.error('Next Track Error:', error);
-                });
-            };
-
-            document.getElementById('prevTrack').onclick = function() {
-                console.log("Previous Track button clicked");
-                player.previousTrack().then(() => {
-                    console.log("Skipped to previous track");
-                }).catch(error => {
-                    console.error('Previous Track Error:', error);
-                });
-            };
-
-            player.connect().then(success => {
-                if (success) {
-                    console.log('Connected to Spotify Player');
-                } else {
-                    console.error('Failed to connect to Spotify Player');
-                }
-            }).catch(error => {
-                console.error('Connection Error:', error);
-            });
-        }
-    </script>
-</div>
-
-
-    
-</div>
 {% endblock %}

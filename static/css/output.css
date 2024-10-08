@@ -624,7 +624,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  color: #ffffff;
+  color: #000000;
   background-color: #31385c5c;
   /* Fondo suave */
 }
@@ -634,125 +634,7 @@ body {
 header {
   background-color: #408bfa;
   /* Azul oscuro */
-  color: #505253;
+  color: #ffffff;
   /* Texto blanco */
   padding: 15px 0;
 }
-
-header a {
-  color: #ffffff;
-  /* Enlaces blancos */
-  text-decoration: none;
-  /* Sin subrayado */
-}
-
-/* Estilo del contenedor principal */
-
-.container {
-  max-width: 800px;
-  margin: 20px auto;
-  /* Centra el contenedor */
-  padding: 20px;
-  background-color: #f9f9f9bf;
-  /* Fondo blanco para el contenido */
-  border-radius: 8px;
-  /* Bordes redondeados */
-  box-shadow: 0 2px 4px rgb(255 250 250 / 10%);
-  /* Sombra suave */
-}
-
-/* Estilo de los títulos */
-
-h1, h2{
-  
-  margin: 0;
-  color: #000000;
-  font-weight: bold;
-  font-size: 17px;
-  
-  
-  /* Azul oscuro para los títulos */
-}
-
-h1 {
-  border-bottom: 2px solid #3d5c85;
-  /* Línea debajo del título principal */
-  padding-bottom: 10px;
-  /* Espacio debajo del título */
-}
-
-h2 {
-  margin-top: 10px;
-  color : #000000 
-
-  /* Espacio superior para los subtítulos */
-}
-
-/* Listas */
-
-ul {
-  list-style-type: none;
-  /* Sin viñetas */
-  padding: 0;
-}
-
-li {
-  background: #3d5c85;
-  /* Azul claro */
-  margin: 5px 0;
-  /* Espacio entre los elementos */
-  padding: 10px;
-  /* Espacio interior */
-  border-radius: 4px;
-  /* Bordes redondeados */
-}
-
-/* Estilo del pie de página */
-
-footer {
-  background-color: #454f58;
-  /* Azul oscuro */
-  color: #ffffff;
-  /* Texto blanco */
-  text-align: center;
-  padding: 10px;
-  position: relative;
-  bottom: 0;
-  width: 100%;
-}
-
-#spotify-player {
-  margin-top: 20px;
-  padding: 20px;
-  border: 1px solid #000000;
-  background-color: #030000;
-  text-align: center;
-}
-
-.player-controls {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.player-controls button {
-  margin: 0 10px;
-  padding: 10px 20px;
-  font-size: 16px;
-  color: rgb(151, 92, 92);
-  background-color: #09076d; /* Spotify Green */
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.player-controls button:hover {
-  background-color: #1ed760; /* Lighter green for hover effect */
-}
-
-#currentTrack {
-  font-size: 18px;
-  margin-top: 10px;
-}
-

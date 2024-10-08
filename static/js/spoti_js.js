@@ -1,6 +1,6 @@
 async function callback() {
     try {
-        const response = await fetch('http://localhost:8000/home/callback', {
+        const response = await fetch('http://localhost:8000/home/callback/', {
             method: 'GET',
             credentials: 'include',
         });

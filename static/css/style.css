@@ -1,15 +1,19 @@
-/* Estilos generales */
-/* Estilos generales */
-
+/* Importaciones de Tailwind (personaliza según sea necesario) */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 /* Estilo del encabezado */
 .header {
-    background: linear-gradient(to right, #28305c, rgb(80, 135, 172)); /* Gradiente azul */
+    background: linear-gradient(to right, #28305c, rgb(80, 135, 172)); /* Gradiente azul elegante */
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-weight: bold;
+    color: #f5f5f5
 }
+
 
 .header-content {
     display: flex;
@@ -19,7 +23,7 @@
 
 h1 {
     margin: 0;
-    color: #000000; /* Color de texto gris oscuro */
+    color: #000000; /* Texto negro para buen contraste */
 }
 
 .social-buttons {
@@ -29,141 +33,212 @@ h1 {
 .social-button {
     margin-right: 10px;
     text-decoration: none;
-    color: #fff; /* Color del texto del botón */
-    background-color: rgba(97, 184, 218, 0.342); /* Fondo azul oscuro para botones */
+    color: #fff; /* Texto blanco */
+    background-color: rgba(97, 184, 218, 0.34); /* Fondo azul claro */
     padding: 5px 10px;
     border-radius: 5px;
-    transition: background-color 0.3s ease; /* Transición suave */
+    transition: background-color 0.3s ease;
 }
 
 .social-button:hover {
-    background-color: #ffffffa8; /* Color claro al pasar el mouse */
+    background-color: #ffffffa8; /* Fondo blanco al pasar el mouse */
 }
 
 .hamburger-menu {
     cursor: pointer;
-    font-size: 24px; /* Tamaño ajustable */
-    color: #fff; /* Color de las líneas */
-    margin-left: auto; /* Mueve el menú a la derecha */
+    font-size: 24px;
+    color: #fff; /* Color blanco para el menú */
+    margin-left: auto; /* Alinear a la derecha */
 }
 
 /* Estilos del pie de página */
 .footer {
     background-color: #ebeef0; /* Gris claro */
-    color: #878383; /* Color de texto gris oscuro */
+    color: #878383; /* Texto gris oscuro */
     text-align: center;
     padding: 15px;
-    font-size: 16px; /* Texto ligeramente más grande */
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); /* Sombra arriba */
+    font-size: 16px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); /* Sombra sutil */
 }
 
-/* Estilos para el carrusel de certificaciones */
+/* Carrusel de certificaciones */
 .certification-carousel {
     display: flex;
     overflow: hidden;
-    white-space: nowrap; /* Previene el ajuste de línea */
+    white-space: nowrap; /* Evita el salto de línea */
 }
 
 .certification-carousel img {
-    width: 200px; /* Ajustar según sea necesario */
+    width: 200px;
     height: auto;
-    margin-right: 10px; /* Espacio entre imágenes */
-    transition: transform 0.2s ease; /* Escalado suave */
+    margin-right: 10px;
+    transition: transform 0.2s ease;
 }
 
 .certification-carousel img:hover {
-    transform: scale(1.05); /* Aumentar ligeramente al pasar el mouse */
+    transform: scale(1.05); /* Efecto de zoom al pasar el mouse */
 }
 
 .hidden {
     display: none;
 }
 
-/* Estilos del menú */
+/* Estilos del menú desplegable */
 #menu {
-    background-color: #a4abb6; /* Fondo del menú desplegable */
-    position: absolute; /* Posicionamiento */
-    right: 10px; /* Alinear a la derecha */
-    top: 50px; /* Ajustar según la altura del encabezado */
-    border: 1px solid #000000; /* Borde */
-    border-radius: 5px; /* Esquinas redondeadas */
-    box-shadow: 0 4px 8px rgba(82, 82, 83, 0.5); /* Sombra */
+    background-color: #a4abb6;
+    position: absolute;
+    right: 10px;
+    top: 50px;
+    border: 1px solid #000000;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(82, 82, 83, 0.5); /* Sombra elegante */
 }
 
 #menu ul {
-    list-style-type: none; /* Sin viñetas */
-    padding: 5px; /* Relleno dentro del menú */
-    margin: 0; /* Eliminar margen predeterminado */
+    list-style: none;
+    padding: 10px;
+    margin: 0;
 }
 
-#menu li {
-    margin: 2px 0; /* Espacio entre elementos */
+ul {
+    color :#f1f1f1
 }
 
-#menu a {
-    text-decoration: none; /* Sin subrayado */
-    color: #ffffff; /* Color de texto gris oscuro */
-    display: block; /* Elementos en bloque */
-    padding: 5px; /* Relleno */
+menu li {
+    margin: 5px 0;
+    padding: 10px;
+    color : #eeeeee
+    
 }
 
-/* Estilos de la caja de nombre */
+list_clas
+
+/* Caja del nombre */
 .name-box {
-    background-color: rgba(87, 86, 86, 0.1); /* Gris claro con transparencia */
-    color: #f7f2f2; /* Color de texto gris oscuro */
-    padding: 10px; /* Espacio interior */
-    border: 0; /* Sin borde */
-    border-radius: 7px; /* Esquinas redondeadas */
-    text-align: center; /* Centrar el texto */
-    font-size: 16px; /* Tamaño de fuente más grande */
-    font-weight: bold; /* Texto en negrita */
-    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.5); /* Sombra gris para profundidad */
-    margin: 20px 0; /* Espacio arriba y abajo */
+    background-color: rgba(87, 86, 86, 0.1);
+    color: #f7f2f2;
+    padding: 10px;
+    border: none;
+    border-radius: 7px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0 1px 1px rgba(255, 255, 255, 0.5); /* Sombra sutil */
+    margin: 20px 0;
 }
 
-/* Estilos de Tailwind (puedes personalizar según sea necesario) */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Ejemplo de estilo adicional de Tailwind */
-.text-gray-700 {
-    color: #333;
-}
-
+/* Sección de información */
 .info-section {
-    background-color: rgb(61 92 133); /* Fondo suave */
+    background-color: rgb(61, 92, 133); /* Fondo azul suave */
     padding: 15px;
-    border-radius: 2px; /* Bordes redondeados */
-    margin-bottom: 20px; /* Espacio inferior */
+    border-radius: 2px;
+    margin-bottom: 20px;
 }
 
 .info-item {
-    margin: 5px 0; /* Espaciado entre elementos */
+    margin: 5px 0;
+    color:#eeeeee
 }
 
 .info-item a {
-    color: #fcfcfc; /* Color azul para enlaces */
-    text-decoration: underline; /* Subrayar enlaces */
+    color: #fdfdfd;
+    text-decoration: underline;
 }
 
 .info-item a:hover {
-    color: #3d5c85; /* Color más oscuro al pasar el ratón */
+    color: #3d5c85;
 }
 
+/* Resumen */
 .summary {
-    background-color: #3d5c85; /* Fondo gris claro */
+    background-color: #3d5c85;
     padding: 15px;
-    border-radius: 8px; /* Bordes redondeados */
-    margin-bottom: 20px; /* Espacio inferior */
+    border-radius: 8px;
+    margin-bottom: 20px;
 }
 
-.p1 {
 
-  margin: 0;
-  color: #ffffff;  
-  font-weight: BOLD;
-  font-size: 15px;
-  padding: 1px;
+/* Contenedor principal */
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f9f9f9bf; /* Fondo claro */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgb(255 250 250 / 10%);
+    color:rgb(255, 255, 255)
 }
 
+/* Estilo de los títulos */
+#h1t {
+    color:#0c1238;
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+#h2 {
+    border-bottom: 2px solid #020202;
+    font-weight: bold;
+}
+
+/* Listas */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: #3d5c85;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+/* Estilo del pie de página */
+footer {
+    background-color: #3d5c85;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Estilo del reproductor de Spotify */
+#spotify-player {
+    background-color: #1db954;
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #191414;
+    background-color: #1db954,;
+    text-align: center;
+}
+
+.player-controls {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.player-controls button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: rgb(255, 255, 255);
+    background-color: #191414; /* Verde Spotify */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.player-controls button:hover {
+    background-color: #1ed760; /* Verde claro */
+}
+
+#currentTrack {
+    font-size: 18px;
+    margin-top: 10px;
+}

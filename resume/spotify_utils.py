@@ -1,18 +1,20 @@
 import os
 import random
 import string
+import requests
 from django.shortcuts import redirect
 from django.http import JsonResponse
-from spotipy import Spotify
+
 from spotipy.oauth2 import SpotifyOAuth
 from dotenv import load_dotenv
-
+import base64
 # Cargar variables de entorno
 load_dotenv()
 
 client_id = os.getenv('CLIENT_ID')
 client_secret = os.getenv('CLIENT_SECRET')
 redirect_uri = os.getenv('REDIRECT_URI')
+
 
 # Configurar el alcance
 scope = "streaming user-read-email user-read-private"
@@ -26,13 +28,34 @@ def login(request):
     return redirect(sp_oauth.get_authorize_url())
 
 def callback(request):
-    sp_oauth = SpotifyOAuth(client_id, client_secret, redirect_uri, scope=scope)
-    token_info = sp_oauth.get_access_token(request.GET.get('code'))
+    code = request.GET.get('code')
+    if not code:
+        return JsonResponse({'error': 'Authorization code not provided'}, status=400)
+
+    auth_string = f"{client_id}:{client_secret}"
+    auth_bytes = auth_string.encode("utf-8") 
+    auth_base64 = base64.b64encode(auth_bytes).decode("utf-8")
+
+    url = "https://accounts.spotify.com/api/token"
+    headers = { 
+        "Authorization": "Basic " + auth_base64,
+        "Content-Type": "application/x-www-form-urlencoded"
+    }
+    data = {
+        "grant_type": "authorization_code",
+        "code": code,
+        "redirect_uri": redirect_uri  # Ensure this matches the registered URI
+    }
     
-    if token_info:
-        access_token = token_info['access_token']
-        print('Este es el access token:', access_token)
-        # Aquí puedes guardar el token o usarlo según sea necesario
-        return redirect('http://127.0.0.1:8000/home/')  # Redirige a la página deseada
+    response = requests.post(url, headers=headers, data=data)
+
+    if response.status_code == 200:
+        json_result = response.json()
+        access_token = json_result.get("access_token")
+        refresh_token = json_result.get("refresh_token")  # You may want to store this for future use
+        return JsonResponse({'access_token': access_token, 'refresh_token': refresh_token})
     else:
-        return JsonResponse({'error': 'Failed to obtain access token'}, status=400)
+        return JsonResponse({'error': 'Failed to obtain access token'}, status=response.status_code)
+
+def get_auth_header(token):
+    return {"Authorization": "Bearer " + token}

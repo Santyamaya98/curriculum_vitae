@@ -142,3 +142,5 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8000",
     # Add any other origins you need
 ]
+
+CORS_ALLOW_CREDENTIALS = True

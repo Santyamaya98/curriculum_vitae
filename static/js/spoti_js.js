@@ -1,17 +1,23 @@
+<<<<<<< HEAD
 async function callback() {
     try {
         const response = await fetch('spotify_callback', {
             method: 'GET',
             credentials: 'include',
         });
+=======
+window.onSpotifyWebPlaybackSDKReady = () => {
+    // Recuperar el token almacenado
+    const token = localStorage.getItem('access_token') || ''; // Asegúrate de que 'access_token' coincida con la clave utilizada para almacenarlo
+>>>>>>> nueva_rama
 
-        console.log("Response Status:", response.status);
-        console.log("Response Headers:", response.headers);
-        
-        // Obtener el texto de la respuesta
-        const text = await response.text();
-        console.log("Response Text:", text); // Imprimir el texto de la respuesta
+    const player = new Spotify.Player({
+        name: 'Web Playback SDK Quick Start Player',
+        getOAuthToken: cb => { cb(token); },
+        volume: 0.5
+    });
 
+<<<<<<< HEAD
         // Verifica si la respuesta es correcta
         if (!response.ok) {
             throw new Error('Failed to fetch access token');
@@ -111,3 +117,8 @@ window.onSpotifyWebPlaybackSDKReady = async () => {
         console.error("Error en onSpotifyWebPlaybackSDKReady:", error);
     }
 }
+=======
+    // Iniciar el reproductor (ejemplo)
+    player.connect();
+};
+>>>>>>> nueva_rama

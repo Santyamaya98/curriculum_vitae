@@ -11,42 +11,6 @@ from django.shortcuts import redirect, render
 from .models import CV, Certifications, Skills, Education, WorkExperience, Project
 from .forms import CVForm, SkillsForm, EducationForm, WorkExperienceForm, ProjectForm
 
-# Vistas de Django
-def check_scope(access_token):
-    url = "https://api.spotify.com/v1/me/permission/check_scope?scope=web-playback"
-    headers = {
-        "Authorization": f"Bearer {access_token}"
-    }
-    response = requests.get(url, headers=headers)
-
-    if response.status_code == 200:
-        return response.json()  # Successful scope check
-    elif response.status_code == 401:
-        return {'error': 'Unauthorized: Invalid access token'}
-    else:
-        return {'error': f'Error {response.status_code}: {response.text}'}
-    
-
-
-def check_playback_state(access_token):
-    url = "https://api.spotify.com/v1/me/player"
-    headers = {
-        "Authorization": f"Bearer {access_token}"
-    }
-    
-    response = requests.get(url, headers=headers)
-    
-    if response.status_code == 200:
-        return response.json()  # Successfully retrieved playback state
-    elif response.status_code == 401:
-        return {'error': 'Unauthorized: Invalid access token'}
-    else:
-        return {'error': f'Error {response.status_code}: {response.text}'}
-
-
-
-
-
 class CVPageView(TemplateView):
     template_name = 'resume/cv_page.html'  # Asegúrate de que la ruta sea correcta
 

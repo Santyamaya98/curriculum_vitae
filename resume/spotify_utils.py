@@ -29,6 +29,7 @@ def login(request):
 
 def callback(request):
     code = request.GET.get('code')
+    print(f"Authorization code: {code}")
     if not code:
         return JsonResponse({'error': 'Authorization code not provided'}, status=400)
 
@@ -53,6 +54,7 @@ def callback(request):
         json_result = response.json()
         access_token = json_result.get("access_token")
         refresh_token = json_result.get("refresh_token")  # You may want to store this for future use
+<<<<<<< HEAD
 
         #save tokens
         request.session['access_token'] = access_token
@@ -60,6 +62,9 @@ def callback(request):
         ''' este se puede usar para confirmar que se estaaba generando acces y refresh token '''
             # return JsonResponse({'access_token': access_token, 'refresh_token': refresh_token})
         return redirect('home')
+=======
+        return redirect('home') # JsonResponse({'access_token': access_token, 'refresh_token': refresh_token})
+>>>>>>> nueva_rama
     else:
         return JsonResponse({'error': 'Failed to obtain access token'}, status=response.status_code)
 

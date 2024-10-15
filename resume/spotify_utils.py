@@ -29,6 +29,7 @@ def login(request):
 
 def callback(request):
     code = request.GET.get('code')
+    print(f"Authorization code: {code}")
     if not code:
         return JsonResponse({'error': 'Authorization code not provided'}, status=400)
 

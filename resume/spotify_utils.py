@@ -29,6 +29,7 @@ def login(request):
 
 def callback(request):
     code = request.GET.get('code')
+    print(f"Authorization code: {code}")
     if not code:
         return JsonResponse({'error': 'Authorization code not provided'}, status=400)
 
@@ -53,7 +54,7 @@ def callback(request):
         json_result = response.json()
         access_token = json_result.get("access_token")
         refresh_token = json_result.get("refresh_token")  # You may want to store this for future use
-        return JsonResponse({'access_token': access_token, 'refresh_token': refresh_token})
+        return redirect('home') # JsonResponse({'access_token': access_token, 'refresh_token': refresh_token})
     else:
         return JsonResponse({'error': 'Failed to obtain access token'}, status=response.status_code)
 

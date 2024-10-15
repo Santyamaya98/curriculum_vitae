@@ -53,7 +53,13 @@ def callback(request):
         json_result = response.json()
         access_token = json_result.get("access_token")
         refresh_token = json_result.get("refresh_token")  # You may want to store this for future use
-        return JsonResponse({'access_token': access_token, 'refresh_token': refresh_token})
+
+        #save tokens
+        request.session['access_token'] = access_token
+        request.session['refresh_token'] = refresh_token
+        ''' este se puede usar para confirmar que se estaaba generando acces y refresh token '''
+            # return JsonResponse({'access_token': access_token, 'refresh_token': refresh_token})
+        return redirect('home')
     else:
         return JsonResponse({'error': 'Failed to obtain access token'}, status=response.status_code)
 

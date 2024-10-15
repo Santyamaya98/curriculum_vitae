@@ -1,6 +1,6 @@
 async function callback() {
     try {
-        const response = await fetch('http://127.0.0.1:8000/home/auth/callback/', {
+        const response = await fetch('spotify_callback', {
             method: 'GET',
             credentials: 'include',
         });
@@ -19,6 +19,7 @@ async function callback() {
 
         // Analiza el texto de la respuesta como JSON
         const data = JSON.parse(text);
+        console.log("El token se ha generado con éxito:", data.access_token);
         return data.access_token; // Asegúrate de que este sea el campo correcto en tu respuesta
     } catch (error) {
         console.error("Error en callback:", error);

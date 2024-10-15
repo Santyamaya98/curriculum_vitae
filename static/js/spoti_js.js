@@ -1,3 +1,4 @@
+
 window.onSpotifyWebPlaybackSDKReady = () => {
     // Recuperar el token almacenado
     const token = localStorage.getItem('access_token') || ''; // Asegúrate de que 'access_token' coincida con la clave utilizada para almacenarlo

@@ -1,15 +1,22 @@
 
-import time 
 import requests
 from django.views import View
 from django.views.generic import TemplateView
 from django.shortcuts import render, redirect
-from django.shortcuts import redirect, render
+from django.http import JsonResponse
 
 
 
 from .models import CV, Certifications, Skills, Education, WorkExperience, Project
 from .forms import CVForm, SkillsForm, EducationForm, WorkExperienceForm, ProjectForm
+
+def get_access_token(request):
+    # Verificar si el token está en la sesión
+    access_token = request.session.get('access_token')
+    if not access_token:
+        return JsonResponse({'error': 'Access token not found'}, status=404)
+    
+    return JsonResponse({'access_token': access_token})
 
 class CVPageView(TemplateView):
     template_name = 'resume/cv_page.html'  # Asegúrate de que la ruta sea correcta

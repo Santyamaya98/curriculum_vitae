@@ -5,24 +5,20 @@
 {% block content %}
 
 
-
-    <div id="spotify-player">
-        <h1>Spotify Player</h1>
-        <div class="player-controls">
-            <button id="prevTrack">Previous</button>
-            <button id="togglePlay">Play/Pause</button>
-            <button id="nextTrack">Next</button>
-        </div>
-        <div id="currentTrack">
-            <h2>Now Playing: <span id="trackName">N/A</span></h2>
-        </div>
-    </div>
-
-
-    <div class="container">
-        <script src="https://sdk.scdn.co/spotify-player.js"></script>
-        <script src="{% static 'js/spoti_js.js' %}"></script>
     
+<div id="spotify-player">
+    <h1>Spotify Player</h1>
+    <div class="player-controls">
+        <button id="prevTrack">Previous</button>
+        <button id="togglePlay">Play/Pause</button>
+        <button id="nextTrack">Next</button>
+    </div>
+    <div id="currentTrack">
+        <h2>Now Playing: <span id="trackName">N/A</span></h2>
+    </div>
+</div>
+
+
     <div class="info-section">
         <p class="info-item"><strong>Email:</strong> <a href="mailto:{{ cv.email }}">{{ cv.email }}</a></p>
         <p class="info-item"><strong>Celular:</strong> {{ cv.phone_number }}</p>

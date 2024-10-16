@@ -1,33 +1,70 @@
-// Suponiendo que tienes una función para manejar la respuesta del backend
-function handleCallbackResponse(response) {
-    if (response.access_token) {
-        localStorage.setItem('access_token', response.access_token);
-        
-        // Inicializar el SDK de reproducción de Spotify
-        window.onSpotifyWebPlaybackSDKReady = () => {
-            const token = localStorage.getItem('access_token') || '';
+window.onload = () => {
+    // Llamada para obtener el access token desde el backend
+    fetch('/home/get-token/')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error en la respuesta del servidor al obtener el access token');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.access_token) {
+                console.log('Access token recibido:', data.access_token);
+                // Guardar el token en localStorage
+                localStorage.setItem('access_token', data.access_token);
 
-            const player = new Spotify.Player({
-                name: 'Web Playback SDK Quick Start Player',
-                getOAuthToken: cb => { cb(token); },
-                volume: 0.5
-            });
+                // Inicializar el reproductor de Spotify
+                initializeSpotifyPlayer(data.access_token);
+            } else {
+                console.error('Access token no disponible en la respuesta');
+            }
+        })
+        .catch(error => {
+            console.error('Error al obtener el access token:', error);
+        });
+};
 
-            player.connect().then(success => {
-                if (success) {
-                    console.log('Conectado al reproductor de Spotify');
-                }
-            }).catch(error => {
-                console.error('Error al conectar con el reproductor:', error);
-            });
-        };
-    } else {
-        console.error('No se obtuvo access token');
-    }
+// Función para inicializar el reproductor de Spotify
+function initializeSpotifyPlayer(token) {
+    const player = new Spotify.Player({
+        name: 'Web Playback SDK Player',
+        getOAuthToken: cb => { cb(token); },
+        volume: 0.5
+    });
+
+    // Conectar el reproductor
+    player.connect().then(success => {
+        if (success) {
+            console.log('Conectado al reproductor de Spotify');
+        }
+    }).catch(error => {
+        console.error('Error al conectar con el reproductor:', error);
+    });
+
+    // Event listeners para los botones
+    document.getElementById('prevTrack').addEventListener('click', () => {
+        player.previousTrack().then(() => {
+            console.log('Pista anterior reproducida');
+        });
+    });
+
+    document.getElementById('togglePlay').addEventListener('click', () => {
+        player.togglePlay().then(() => {
+            console.log('Reproducción pausada/reanudada');
+        });
+    });
+
+    document.getElementById('nextTrack').addEventListener('click', () => {
+        player.nextTrack().then(() => {
+            console.log('Siguiente pista reproducida');
+        });
+    });
+
+    // Actualizar el nombre de la pista actual
+    player.addListener('player_state_changed', state => {
+        if (state) {
+            const trackName = state.track_window.current_track.name;
+            document.getElementById('trackName').textContent = trackName;
+        }
+    });
 }
-
-// Suponiendo que haces una llamada AJAX para obtener el token
-fetch('/your-callback-endpoint')
-    .then(response => response.json())
-    .then(handleCallbackResponse)
-    .catch(error => console.error('Error en la llamada al callback:', error));

@@ -54,9 +54,22 @@ def callback(request):
         json_result = response.json()
         access_token = json_result.get("access_token")
         refresh_token = json_result.get("refresh_token")  # You may want to store this for future use
-        return JsonResponse({'access_token': access_token, 'refresh_token': refresh_token})
+
+        # save access and refresh token 
+        request.session["access_token"] = access_token
+        request.session["refresh_token"] = refresh_token
+
+        return redirect('Home')
     else:
         return JsonResponse({'error': 'Failed to obtain access token'}, status=response.status_code)
+    
+def get_access_token(request):
+    # Verificar si el token está en la sesión
+    access_token = request.session.get('access_token')
+    if not access_token:
+        return JsonResponse({'error': 'Access token not found'}, status=404)
+    
+    return JsonResponse({'access_token': access_token})
 
-def get_auth_header(token):
-    return {"Authorization": "Bearer " + token}
+#def get_auth_header(token):
+#   return {"Authorization": "Bearer " + token}

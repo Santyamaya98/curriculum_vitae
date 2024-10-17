@@ -14,8 +14,9 @@ A personal CV built using Django, showcasing my skills, experience, and educatio
 - Django
 - Python
 - HTML/CSS
-- Bootstrap
+- tailwind
 - SQLite (or your preferred database)
+- js
 
 ## Getting Started
 
@@ -28,5 +29,5 @@ A personal CV built using Django, showcasing my skills, experience, and educatio
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/USERNAME/django-cv.git
-   cd django-cv
+   git clone https://github.com/santyamaya98/curriculum_vitae.git
+   cd curriculum_vitae

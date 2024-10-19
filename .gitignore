@@ -30,3 +30,7 @@ media/
 
 # Ignore any other files or directories you don't want to track
 .cache
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

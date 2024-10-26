@@ -30,4 +30,8 @@ A personal CV built using Django, showcasing my skills, experience, and educatio
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/santyamaya98/curriculum_vitae.git
+2. **Change dir**
+   ```bash
    cd curriculum_vitae
+3. Now you can config it to deploy with aws and elastick beanstalck or check this my webstie I used gunicorn and EC2 to deploy this app
+  http://44.203.184.75/home/ copy and paste this link to check the website 

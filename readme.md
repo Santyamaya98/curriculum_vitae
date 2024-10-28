@@ -34,4 +34,4 @@ A personal CV built using Django, showcasing my skills, experience, and educatio
    ```bash
    cd curriculum_vitae
 3. Now you can config it to deploy with aws and elastick beanstalck or check this my webstie I used gunicorn and EC2 to deploy this app
-  http://44.203.184.75/home/ copy and paste this link to check the website 
+  http://sac-cv.com/home/ copy and paste this link to check the website 

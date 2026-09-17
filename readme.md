@@ -1,3 +1,4 @@
+- webside: https://santyamaya98.github.io/cv/
 ## Features
 
 - Personal information display
@@ -7,11 +8,8 @@
 
 ## Technologies Used
 
-- Django
 - Python
 - HTML/CSS
-- tailwind
-- SQLite (or your preferred database)
 - js
 
 ## Getting Started

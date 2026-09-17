@@ -1,7 +1,3 @@
-# Django CV
-
-A personal CV built using Django, showcasing my skills, experience, and education. This project serves as a digital resume that can be easily updated and displayed online.
-
 ## Features
 
 - Personal information display
